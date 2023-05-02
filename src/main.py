@@ -1,7 +1,9 @@
 import sys
 import time
 
+from emit import Emitter
 from lex import Lexer
+from parse import Parser
 from tok import TokenType
 
 if __name__ == "__main__":
@@ -11,14 +13,15 @@ if __name__ == "__main__":
         sys.exit("Compiler missing source file as argument.")
 
     with open(sys.argv[1], "r") as f:
-        source = f.read()
-
-    print(source)
+        source = f.read() + "\n"
 
     lexer = Lexer(source)
+    emitter = Emitter()
+    parser = Parser(lexer, emitter)
 
-    token = lexer.get_token()
-    while token.type != TokenType.EOF:
-        print(token)
-        token = lexer.get_token()
-        # time.sleep(2)
+    parser.program()
+
+    for i in emitter.assignments:
+        print(i)
+
+    print(emitter.language)

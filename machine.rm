@@ -1,0 +1,5 @@
+PROP coffee 
+PROP office 
+
+BLOCK WHILE coffee == FALSE
+BLOCK WHILE office == FALSE
