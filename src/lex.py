@@ -1,5 +1,7 @@
 import sys
 
+from tok import Token, TokenType
+
 
 class Lexer:
     def __init__(self, source: str) -> None:
@@ -51,14 +53,45 @@ class Lexer:
         self.skip_whitespace()
         self.skip_comments()
 
-        print(self.curr_char)
+        if self.curr_char == "=":
+            if self.peek() == "=":
+                last_char = self.curr_char
+                self.next_char()
+                token = Token(last_char + self.curr_char, TokenType.EQEQ)
+            else:
+                self.next_char()
+                self.abort(f"Expected '==', got ={self.curr_char}")
+        elif self.curr_char == "\n":
+            token = Token(self.curr_char, TokenType.NEWLINE)
+        elif self.curr_char == "\0":
+            token = Token(self.curr_char, TokenType.EOF)
+        elif self.curr_char.isalpha():
+            start_pos = self.curr_pos
+
+            while self.peek().isalnum():
+                self.next_char()
+
+            token_text = self.source[start_pos : self.curr_pos + 1]
+            keyword = Token.get_keyword(token_text)
+
+            if keyword:
+                token = Token(token_text, keyword)
+            else:
+                token = Token(token_text, TokenType.IDENT)
+        else:
+            self.abort("Unknown token: " + self.curr_char)
+
         self.next_char()
+        return token
 
 
 if __name__ == "__main__":
-    source = "PROP coffee\n"
+    source = "PROP coffee == BLOCK WHILE TRUE FALSE faLSEx\n"
 
     lexer = Lexer(source)
 
-    for i in range(11):
-        lexer.get_token()
+    token = lexer.get_token()
+
+    while token.type != TokenType.EOF:
+        print(token)
+        token = lexer.get_token()
