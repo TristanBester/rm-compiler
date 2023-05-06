@@ -23,7 +23,7 @@ if __name__ == "__main__":
     print()
 
     print(
-        "Truth table cotaining the elements of the powerset of P (this set is the input alphabet to the reward machine):"
+        "Truth table containing the elements of the powerset of P (this set is the input alphabet to the reward machine):"
     )
     for i, x in enumerate(emitter.assignments):
         print(f"Alphabet symbol: {i}\tProposition assigments: {x}")

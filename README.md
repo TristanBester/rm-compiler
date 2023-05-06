@@ -24,7 +24,7 @@ Compiler started.
 Proposition coffee declared, index in proposition set P: 0
 Proposition office declared, index in proposition set P: 1
 
-Truth table cotaining the elements of the powerset of P (this set is the input alphabet to the reward machine):
+Truth table containing the elements of the powerset of P (this set is the input alphabet to the reward machine):
 Alphabet symbol: 0      Proposition assigments: [False, False]
 Alphabet symbol: 1      Proposition assigments: [True, False]
 Alphabet symbol: 2      Proposition assigments: [False, True]
