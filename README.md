@@ -7,7 +7,8 @@
 - formula ::= ident "==" ( "TRUE" | "FALSE" )
 
 ## Usage
-The soure code file used in the example is "machine.rm"
+The soure code file used in the example is "machine.rm" which encodes the tasks of delivering coffee
+to the office.
 
 Command to run compiler:
 ```bash
