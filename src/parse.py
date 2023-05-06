@@ -45,6 +45,17 @@ class Parser:
         while self.check_curr_token(TokenType.NEWLINE):
             self.next_token()
 
+        # Parse all proposition declarations
+        while self.check_curr_token(TokenType.PROP):
+            self.emitter.declare_proposition(self.peek_token.text)
+
+            self.next_token()
+            self.match(TokenType.IDENT)
+            self.nl()
+
+        # After all propositions have been declared, init assignments
+        self.emitter.init_assignments()
+
         # Parse all statements until file is complete
         while not self.check_curr_token(TokenType.EOF):
             self.statement()
@@ -52,17 +63,8 @@ class Parser:
     def statement(self):
         """Statement grammar rule."""
 
-        if self.check_curr_token(TokenType.PROP):
-            # print(f"Declared proposition: {self.peek_token.text}")
-
-            self.emitter.declare_proposition(self.peek_token.text)
-
-            self.next_token()
-            self.match(TokenType.IDENT)
-            self.nl()
-        elif self.check_curr_token(TokenType.BLOCK):
+        if self.check_curr_token(TokenType.BLOCK):
             self.emitter.init_assignments()
-            # print("Block while detected: ", end="")
 
             self.next_token()
             self.match(TokenType.WHILE)
@@ -73,12 +75,9 @@ class Parser:
 
     def formula(self):
         """Formula grammar rule."""
-        # print(f"{self.curr_token.text} ", end="")
         proposition = self.curr_token.text
         self.match(TokenType.IDENT)
-        # print(f"{self.curr_token.text} ", end="")
         self.match(TokenType.EQEQ)
-        # print(f"{self.curr_token.text} ", end="\n")
 
         if self.check_curr_token(TokenType.TRUE):
             self.emitter.block_while(proposition, True)

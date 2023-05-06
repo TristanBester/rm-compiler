@@ -83,15 +83,3 @@ class Lexer:
 
         self.next_char()
         return token
-
-
-if __name__ == "__main__":
-    source = "PROP coffee == BLOCK WHILE TRUE FALSE faLSEx\n"
-
-    lexer = Lexer(source)
-
-    token = lexer.get_token()
-
-    while token.type != TokenType.EOF:
-        print(token)
-        token = lexer.get_token()

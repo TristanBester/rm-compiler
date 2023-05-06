@@ -4,6 +4,10 @@ class Emitter:
         self.language = ""
 
     def declare_proposition(self, name):
+        print(
+            f"Proposition {name} declared, index in proposition set P: {len(self.propositions)}"
+        )
+
         self.propositions.append(name)
 
     def init_assignments(self):
@@ -34,7 +38,7 @@ class Emitter:
         return satisfying_assignment_idx
 
     def block_while(self, proposition, truth_value):
-        print(proposition, truth_value, self._get_prop_idx(proposition))
+        # print(proposition, truth_value, self._get_prop_idx(proposition))
 
         satisfying_assignment_idx = self._get_satisfying_assignment_idx(
             proposition, truth_value

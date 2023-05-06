@@ -7,7 +7,7 @@ from parse import Parser
 from tok import TokenType
 
 if __name__ == "__main__":
-    print("Compiler started.")
+    print("Compiler started.", end="\n\n")
 
     if len(sys.argv) != 2:
         sys.exit("Compiler missing source file as argument.")
@@ -20,8 +20,13 @@ if __name__ == "__main__":
     parser = Parser(lexer, emitter)
 
     parser.program()
+    print()
 
-    for i in emitter.assignments:
-        print(i)
+    print(
+        "Truth table cotaining the elements of the powerset of P (this set is the input alphabet to the reward machine):"
+    )
+    for i, x in enumerate(emitter.assignments):
+        print(f"Alphabet symbol: {i}\tProposition assigments: {x}")
 
-    print(emitter.language)
+    print()
+    print(f"Output regular expression: {emitter.language}")
