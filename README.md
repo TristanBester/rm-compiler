@@ -37,7 +37,7 @@ Output regular expression: (0 + 2)*(1 + 3)(0 + 1)*(2 + 3)
 
 The resulting regular expression can be used to generate the corresponding DFA using: https://ivanzuzak.info/noam/webapps/fsm_simulator/
 
-Output RE: (0 + 2)*(1 + 3)(0 + 1)*(2 + 3) 
+Output RE: (0 + 2)\*(1 + 3)(0 + 1)\*(2 + 3)
 
 Generated DFA:
 
